@@ -870,7 +870,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 744529523}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c30ced327ab80b42842823756070eba, type: 3}
   m_Name: 
@@ -925,7 +925,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joystickSize: {x: 400, y: 400}
   joystick: {fileID: 489007165}
-  minTapToSwipeDistance: 7
+  minSwipeDistance: 7
 --- !u!114 &744529530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -938,6 +938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e89e2598857fd41996412d85c8a719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: dff92068fb0537a439182c187a551704, type: 2}
 --- !u!1 &786714032 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d3e648e76e427ae40996340099298bf8,

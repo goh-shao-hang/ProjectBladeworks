@@ -8,7 +8,7 @@ namespace GameCells.Player
     {
         protected Player _player;
 
-        public PlayerBaseState(FiniteStateMachine context, StateFactory stateFactory, Player player) : base(context, stateFactory)
+        public PlayerBaseState(FiniteStateMachine context, Player player) : base(context)
         {
             this._player = player;
         }

@@ -6,14 +6,14 @@ using Etouch = UnityEngine.InputSystem.EnhancedTouch;
 
 namespace GameCells.Player.Input
 {
-    public class TouchInputJoystick : MonoBehaviour, IInputHandler
+    public class TouchInputJoystick : MonoBehaviour//, IInputHandler
     {
         [SerializeField] private Vector2 joystickSize = new Vector2(300, 300);
         [SerializeField] private Joystick joystick;
 
         private Finger movementFinger;
         private Vector2 movement;
-        public Vector2 Movement => movement;
+        public Vector2 MovementInput => movement;
         private bool tap;
         public bool Tap => tap;
 

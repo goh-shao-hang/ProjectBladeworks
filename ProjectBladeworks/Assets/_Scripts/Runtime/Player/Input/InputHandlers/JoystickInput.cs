@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,29 +10,30 @@ namespace GameCells.Player.Input
 {
     public class JoystickInput : MonoBehaviour, IInputHandler
     {
+        [Header("Settings")]
         [SerializeField] private Vector2 joystickSize = new Vector2(300, 300);
         [SerializeField] private Joystick joystick;
-
-        private Vector2 movement;
-        public Vector2 Movement => movement;
-
-        [Header("Settings")]
-        [SerializeField] private float minTapToSwipeDistance = 7; //If distance exceeds this value when touch is released, consider this a swipe instead of a tap.
-
-        //References
-        private PlayerControls playerControls;
-
+        [SerializeField] private float minSwipeDistance = 7; //If distance exceeds this value when touch is released, consider this a swipe instead of a tap.
         //Fields and properties
         private Vector2 touchPosition;
         private Vector2 dragStartPosition;
         private bool tap;
         private bool touchDetected;
         private Vector2 swipeDirection;
+        private Vector2 movement;
+
+        //References
+        private PlayerControls playerControls;
 
         public Vector2 TouchPosition => touchPosition;
-        public Vector2 DragStartPosition => dragStartPosition;
+        public Vector2 TouchStartPosition => dragStartPosition;
         public bool Tap => tap;
         public bool TouchDetected => touchDetected;
+        public Vector2 MovementInput => movement;
+
+        public bool AttackInput => tap;
+
+        public bool DodgeInput => false; //Todo: fix
 
         #region Animator Hash
 
@@ -67,12 +69,10 @@ namespace GameCells.Player.Input
             playerControls = new PlayerControls();
 
             //Register different actions as events
-            playerControls.Gameplay.Tap.performed += ctx => OnTap(ctx);
-            playerControls.Gameplay.TouchStart.performed += ctx => OnTouchBegin(ctx);
-            playerControls.Gameplay.TouchMove.performed += ctx => OnTouchMoved(ctx);
-            playerControls.Gameplay.TouchEnd.performed += ctx => OnTouchEnded(ctx);
-            //playerControls.Gameplay.StartDrag.performed += ctx => OnStartDrag(ctx);
-            //playerControls.Gameplay.EndDrag.performed += ctx => OnEndDrag(ctx);
+            playerControls.Gameplay.Attack.performed += ctx => OnTap(ctx);
+            playerControls.Gameplay.Move.performed += ctx => OnTouchMoved(ctx);
+            playerControls.Gameplay.Touch.canceled += ctx => OnTouchEnded(ctx);
+            playerControls.Gameplay.Touch.performed += ctx => OnTouchBegin(ctx);
         }
 
         #region Input Events
@@ -87,11 +87,10 @@ namespace GameCells.Player.Input
 
         private void OnTouchBegin(InputAction.CallbackContext ctx)
         {
-            if (touchDetected) return; //If this is not null, a finger is already using the joystick so ignore the new one
+            if (TouchDetected) return; //If this is not null, a finger is already using the joystick so ignore the new one
 
             if (touchPosition.y >= Screen.height * 0.5f) return; //Ignore if the finger is higher than half the screen
 
-            //Debug.Log("touched");
             touchDetected = true;
             movement = Vector2.zero;
             joystick.gameObject.SetActive(true);
@@ -103,7 +102,6 @@ namespace GameCells.Player.Input
         {
             //if (!touchDetected) return;
 
-            Debug.Log("move");
             Vector2 knobPosition;
             float maxMovement = joystickSize.x / 2f;
 
@@ -125,10 +123,9 @@ namespace GameCells.Player.Input
         }
 
         private void OnTouchEnded(InputAction.CallbackContext ctx)
-        {   
+        {
             //if (touchDetected == false) return;
 
-            //Debug.Log("up");
             touchDetected = false;
             joystick.Knob.anchoredPosition = Vector2.zero;
             joystick.gameObject.SetActive(false);
@@ -145,7 +142,7 @@ namespace GameCells.Player.Input
             Vector2 touchDelta = touchPosition - dragStartPosition;
             float sqrDistance = touchDelta.sqrMagnitude;
 
-            if (sqrDistance > (minTapToSwipeDistance * minTapToSwipeDistance))
+            if (sqrDistance > (minSwipeDistance * minSwipeDistance))
             {
                 swipeDirection = touchDelta;
             }

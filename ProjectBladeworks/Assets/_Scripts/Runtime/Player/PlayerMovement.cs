@@ -32,13 +32,13 @@ namespace GameCells.Player
 
         private void Update()
         {
-            appliedMovement.x = InputHandler.Movement.x;
-            appliedMovement.z = InputHandler.Movement.y;
+            appliedMovement.x = InputHandler.MovementInput.x;
+            appliedMovement.z = InputHandler.MovementInput.y;
 
             CharacterController.Move(moveSpeed * appliedMovement * Time.deltaTime);
             UpdateAnimations();
 
-            if (inputHandler.Tap)
+            if (inputHandler.AttackInput)
             {
                 animator.SetTrigger(attackHash);
             }

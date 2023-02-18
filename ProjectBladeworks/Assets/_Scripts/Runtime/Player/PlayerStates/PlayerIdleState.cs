@@ -6,7 +6,7 @@ namespace GameCells.Player
 {
     public class PlayerIdleState : PlayerBaseState
     {
-        public PlayerIdleState(FiniteStateMachine context, StateFactory stateFactory, Player player) : base(context, stateFactory, player)
+        public PlayerIdleState(FiniteStateMachine context, Player player) : base(context, player)
         {
         }
 
@@ -14,7 +14,14 @@ namespace GameCells.Player
         {
             base.CheckSwitchState();
 
-            //if (_context.ii)
+            if (_player.InputHandler.AttackInput)
+            {
+                _player.Animator.SetTrigger(GameData.attackHash);
+            }
+            else if (_player.InputHandler.MovementInput != Vector2.zero)
+            {
+                _ctx.ChangeState(_player.PlayerStateFactory.Move);
+            }
         }
     }
 }

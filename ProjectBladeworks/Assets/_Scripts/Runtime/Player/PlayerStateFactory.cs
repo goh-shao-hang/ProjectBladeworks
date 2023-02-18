@@ -13,7 +13,7 @@ namespace GameCells.Player
             this._player = player;
         }
 
-        public BaseState Idle => new PlayerIdleState(_context, this, _player);
-        public BaseState Move => new PlayerMoveState(_context, this, _player);
+        public BaseState Idle => new PlayerIdleState(_context, _player);
+        public BaseState Move => new PlayerMoveState(_context, _player);
     }
 }

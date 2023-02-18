@@ -6,17 +6,19 @@ namespace GameCells
 {
     public abstract class BaseState
     {
-        protected FiniteStateMachine _context;
-        protected StateFactory _stateFactory;
-        public BaseState(FiniteStateMachine context, StateFactory stateFactory)
+        protected FiniteStateMachine _ctx;
+        public BaseState(FiniteStateMachine context)
         {
-            this._context = context;
-            this._stateFactory = stateFactory;
+            this._ctx = context;
         }
 
         public virtual void Enter() { }
 
-        public virtual void Execute() { }
+        public virtual void Execute()
+        {
+            CheckSwitchState();
+        }
+
         public virtual void Exit() { }
         public virtual void CheckSwitchState() { }
         public virtual void InitializeSubStates() { }
@@ -24,7 +26,7 @@ namespace GameCells
         private void UpdateStates() { }
         private void SwitchState(BaseState newState) 
         {
-            _context.ChangeState(newState);
+            _ctx.ChangeState(newState);
         }
         private void SetSubState() { }
         private void SetSuperState() {}

@@ -6,7 +6,8 @@ namespace GameCells.Player.Input
 {
     public interface IInputHandler
     {
-        public Vector2 Movement { get; }
-        public bool Tap { get; }
+        public Vector2 MovementInput { get; }
+        public bool AttackInput { get; }
+        public bool DodgeInput { get; }
     }
 }
