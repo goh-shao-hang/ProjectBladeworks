@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cb6d0610ac0765741b52c4400ef69216
+guid: 21fcec9475240334f86be0bb2bd56e1c
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -17,11 +17,7 @@ ModelImporter:
     removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
-      copied configuration does not match position in animation file:\n\t'mixamorig:LeftUpLeg'
-      : position error = 16.661081 mm\n\t'mixamorig:LeftLeg' : position error = 36.438225
-      mm\n\t'mixamorig:LeftFoot' : position error = 23.462648 mm\n\t'mixamorig:LeftToeBase'
-      : position error = 18.399612 mm\n"
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -35,36 +31,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: mixamo.com
-      takeName: mixamo.com
-      internalID: -203655887218126122
-      firstFrame: 0
-      lastFrame: 30
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 0
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 1
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 0
   meshes:
     lODScreenPercentages: []

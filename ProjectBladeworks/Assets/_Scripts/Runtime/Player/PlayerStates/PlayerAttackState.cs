@@ -39,6 +39,7 @@ namespace GameCells.Player
         private void AllowNextAttack()
         {
             nextComboAllowed = true;
+            _player.Animator.SetBool(GameData.isAttackingHash, false);
         }
 
         private void TriggerCombo()
@@ -48,14 +49,14 @@ namespace GameCells.Player
             _player.Animator.speed = _player.WeaponManager.WeaponData.baseAttackSpeedPercentage;
             _player.Animator.SetBool(GameData.isAttackingHash, true);
             _player.Animator.SetInteger(GameData.currentComboHash, _player.WeaponManager.CurrentComboCount);
-            _player.Animator.SetBool(GameData.isMovingHash, false);
+            //_player.Animator.SetBool(GameData.isMovingHash, false);
         }
 
         public override void CheckSwitchState()
         {
             base.CheckSwitchState();
 
-            if (attackFinished == false && nextComboAllowed && _player.InputHandler.AttackInput)
+            if (nextComboAllowed && _player.InputHandler.AttackInput)
             {
                 TriggerCombo();
             }

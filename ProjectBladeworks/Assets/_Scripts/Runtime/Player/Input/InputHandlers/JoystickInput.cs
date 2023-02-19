@@ -82,7 +82,7 @@ namespace GameCells.Player.Input
             if (touchPosition.y >= Screen.height * 0.5f) return;
 
             tap = true;
-            Debug.Log("TAP");
+            //Debug.Log("TAP");
         }
 
         private void OnTouchBegin(InputAction.CallbackContext ctx)
