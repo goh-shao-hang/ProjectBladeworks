@@ -15,6 +15,8 @@ namespace GameCells.Player
         public override void Enter()
         {
             base.Enter();
+
+            _player.Animator.SetBool(GameData.isMovingHash, true);
         }
 
         public override void Execute()
@@ -24,21 +26,21 @@ namespace GameCells.Player
             movement.x = _player.InputHandler.MovementInput.x;
             movement.z = _player.InputHandler.MovementInput.y;
 
-            _player.CharacterController.Move(_player.PlayerData.BaseSpeed * movement * Time.deltaTime);
-            UpdateMoveAnimations(movement);
+            _player.SetMovement(_player.PlayerData.BaseSpeed * movement * Time.deltaTime);
+            UpdateMoveAnimations(movement, GameData.moveAnimationDampTime);
         }
 
         public override void Exit()
         {
             base.Exit();
 
-            UpdateMoveAnimations(Vector3.zero);
+            _player.Animator.SetBool(GameData.isMovingHash, false);
         }
 
-        private void UpdateMoveAnimations(Vector3 movement)
+        private void UpdateMoveAnimations(Vector3 movement, float damping)
         {
-            _player.Animator.SetFloat(GameData.xMovementHash, movement.x, GameData.moveAnimationDampTime, Time.deltaTime);
-            _player.Animator.SetFloat(GameData.yMovementHash, movement.z, GameData.moveAnimationDampTime, Time.deltaTime);
+            _player.Animator.SetFloat(GameData.xMovementHash, movement.x, damping, Time.deltaTime);
+            _player.Animator.SetFloat(GameData.yMovementHash, movement.z, damping, Time.deltaTime);
         }
 
 
@@ -48,9 +50,9 @@ namespace GameCells.Player
 
             if (_player.InputHandler.AttackInput)
             {
-                _player.Animator.SetTrigger(GameData.attackHash);
+                _ctx.ChangeState(_player.PlayerStateFactory.Attack);
             }
-            else if (movement == Vector3.zero)
+            else if (_player.InputHandler.MovementInput == Vector2.zero)
             {
                 _ctx.ChangeState(_player.PlayerStateFactory.Idle);
             }

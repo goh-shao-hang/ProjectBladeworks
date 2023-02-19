@@ -10,13 +10,29 @@ namespace GameCells.Player
         {
         }
 
+        public override void Execute()
+        {
+            base.Execute();
+
+            /*if (_player.Animator.GetFloat(GameData.xMovementHash) >= 0.01f || (_player.Animator.GetFloat(GameData.xMovementHash) >= 0.01f))
+            {
+                UpdateMoveAnimations(Vector3.zero, GameData.moveAnimationDampTime);
+            }*/
+        }
+
+        private void UpdateMoveAnimations(Vector3 movement, float damping)
+        {
+            _player.Animator.SetFloat(GameData.xMovementHash, movement.x, damping, Time.deltaTime);
+            _player.Animator.SetFloat(GameData.yMovementHash, movement.z, damping, Time.deltaTime);
+        }
+
         public override void CheckSwitchState()
         {
             base.CheckSwitchState();
 
             if (_player.InputHandler.AttackInput)
             {
-                _player.Animator.SetTrigger(GameData.attackHash);
+                _ctx.ChangeState(_player.PlayerStateFactory.Attack);
             }
             else if (_player.InputHandler.MovementInput != Vector2.zero)
             {

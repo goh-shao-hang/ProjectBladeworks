@@ -49,7 +49,7 @@ namespace GameCells.Player.Input
                 },
                 {
                     ""name"": ""Move"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""6c36afce-b41b-467a-918f-067322e393b3"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",

@@ -8,9 +8,12 @@ public class GameData
 
     #region Animator Hashes
 
+    public static readonly int isMovingHash = Animator.StringToHash("isMoving");
     public static readonly int xMovementHash = Animator.StringToHash("xMovement");
     public static readonly int yMovementHash = Animator.StringToHash("yMovement");
     public static readonly int attackHash = Animator.StringToHash("attack");
+    public static readonly int isAttackingHash = Animator.StringToHash("isAttacking");
+    public static readonly int currentComboHash = Animator.StringToHash("currentCombo");
 
     #endregion Animator Hashes
 }

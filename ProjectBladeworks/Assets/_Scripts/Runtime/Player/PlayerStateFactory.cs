@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace GameCells.Player
 {
     public class PlayerStateFactory : StateFactory
@@ -15,5 +11,6 @@ namespace GameCells.Player
 
         public BaseState Idle => new PlayerIdleState(_context, _player);
         public BaseState Move => new PlayerMoveState(_context, _player);
+        public BaseState Attack => new PlayerAttackState(_context, _player);
     }
 }
