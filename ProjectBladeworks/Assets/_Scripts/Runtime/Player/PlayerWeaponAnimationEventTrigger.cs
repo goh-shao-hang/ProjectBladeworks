@@ -1,21 +1,19 @@
 using System;
 using UnityEngine;
+using GameCells.Core;
 
 namespace GameCells.Player
 {
     public class PlayerWeaponAnimationEventTrigger : MonoBehaviour
     {
-        public event Action OnAttackFinished;
-        public event Action OnAllowNextAttack;
-
         private void AttackFinished()
         {
-            OnAttackFinished?.Invoke();
+            InGameEventsManager.GetInstance().OnComboFinished?.Invoke();
         }
 
         private void AllowNextCombo()
         {
-            OnAllowNextAttack?.Invoke();
+            InGameEventsManager.GetInstance().OnAllowNextCombo?.Invoke();
         }
     }
 }

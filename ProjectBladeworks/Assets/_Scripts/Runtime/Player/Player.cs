@@ -21,8 +21,8 @@ namespace GameCells.Player
         private PlayerWeaponAnimationEventTrigger playerAnimationEventTrigger;
         public PlayerWeaponAnimationEventTrigger PlayerAnimationEventTrigger => playerAnimationEventTrigger ??= GetComponentInChildren<PlayerWeaponAnimationEventTrigger>();
 
-        private WeaponManager weaponManager;
-        public WeaponManager WeaponManager => weaponManager ??= GetComponentInChildren<WeaponManager>();
+        private CombatManager combatManager;
+        public CombatManager CombatManager => combatManager ??= GetComponentInChildren<CombatManager>();
 
         [SerializeField] private Transform currentEnemyTransform;
 
@@ -36,12 +36,12 @@ namespace GameCells.Player
 
         private void OnEnable()
         {
-            WeaponManager.OnWeaponEquip += SetRuntimeAnimatorController;
+            CombatManager.OnWeaponEquip += SetRuntimeAnimatorController;
         }
 
         private void OnDisable()
         {
-            WeaponManager.OnWeaponEquip -= SetRuntimeAnimatorController;
+            CombatManager.OnWeaponEquip -= SetRuntimeAnimatorController;
         }
 
         private void Awake()

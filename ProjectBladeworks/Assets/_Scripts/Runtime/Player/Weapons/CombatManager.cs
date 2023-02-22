@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using GameCells.Core;
 
 namespace GameCells.Player.Weapons
 {
-    public class WeaponManager : MonoBehaviour
+    public class CombatManager : MonoBehaviour
     {
         [SerializeField] private SO_Weapon _weaponData;
         [SerializeField] private Transform _weaponSocket;
@@ -13,13 +14,28 @@ namespace GameCells.Player.Weapons
 
         private Coroutine comboTimerCO;
         private int currentComboCount;
+        private bool isComboFinished = false;
+        private bool isNextComboAllowed = false;
 
         public SO_Weapon WeaponData => _weaponData;
         public int CurrentComboCount => currentComboCount;
+        public bool IsComboFinished => isComboFinished;
+        public bool IsNextComboAllowed => isNextComboAllowed;
 
         private void Start()
         {
             InitializeWeapon();
+        }
+
+        private void OnEnable()
+        {
+            InGameEventsManager.GetInstance().OnComboFinished.AddSubscriber(ComboFinished);
+            InGameEventsManager.GetInstance().OnAllowNextCombo.AddSubscriber(AllowNextCombo);
+        }
+
+        private void OnDisable()
+        {
+            
         }
 
         [ContextMenu("Initialize Weapon")]
@@ -38,11 +54,14 @@ namespace GameCells.Player.Weapons
 
         public void ResetCombo()
         {
+            isNextComboAllowed = true;
             currentComboCount = 0;
         }
         
         public void TriggerCombo()
         {
+            isComboFinished = false;
+            isNextComboAllowed = false;
             currentComboCount = (currentComboCount + 1) % _weaponData.comboCount;
 
             if (comboTimerCO != null)
@@ -54,6 +73,17 @@ namespace GameCells.Player.Weapons
             if (currentComboCount != 0)
                 comboTimerCO = StartCoroutine(StartComboTimerCO());
         }
+
+        public void AllowNextCombo()
+        {
+            isNextComboAllowed = true;
+        }
+
+        private void ComboFinished()
+        {
+            isComboFinished = true;
+        }
+
 
         //TODO: maybe use async instead
         private IEnumerator StartComboTimerCO()
