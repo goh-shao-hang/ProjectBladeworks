@@ -21,8 +21,6 @@ MonoBehaviour:
     type: 2}
   comboCount: 3
   comboResetTime: 1.5
-  baseAttackPercentage: 1
-  baseAttackSpeedPercentage: 1
   comboData:
   - name: Combo 1
     baseAttackPercentage: 1

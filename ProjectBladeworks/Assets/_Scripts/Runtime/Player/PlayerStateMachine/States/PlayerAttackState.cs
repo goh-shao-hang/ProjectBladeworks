@@ -24,7 +24,7 @@ namespace GameCells.Player
         {
             _player.Animator.SetTrigger(GameData.TriggerComboHash);
             _player.Animator.SetInteger(GameData.CurrentComboHash, _player.CombatManager.CurrentComboCount);
-            _player.Animator.speed = _player.CombatManager.WeaponData.baseAttackSpeedPercentage;
+            _player.Animator.speed = _player.CombatManager.WeaponData.comboData[_player.CombatManager.CurrentComboCount].baseAttackSpeedPercentage;
 
             _player.CombatManager.TriggerCombo();
             

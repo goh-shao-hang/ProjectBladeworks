@@ -15,8 +15,6 @@ namespace GameCells.Player.Weapons
 
         public int comboCount = 3;
         public float comboResetTime = 1.5f;
-        public float baseAttackPercentage = 1f;
-        public float baseAttackSpeedPercentage = 1f;
 
         public ComboInstanceData[] comboData;
 
