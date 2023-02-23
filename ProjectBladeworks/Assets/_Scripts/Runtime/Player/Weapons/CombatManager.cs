@@ -27,6 +27,14 @@ namespace GameCells.Player.Weapons
             InitializeWeapon();
         }
 
+        private void Update()
+        {
+            if (UnityEngine.Input.GetKeyDown(KeyCode.F1))
+            {
+                InitializeWeapon();
+            }
+        }
+
         private void OnEnable()
         {
             InGameEventsManager.GetInstance().OnComboFinished.AddSubscriber(ComboFinished);

@@ -23,3 +23,13 @@ MonoBehaviour:
   comboResetTime: 1.5
   baseAttackPercentage: 1
   baseAttackSpeedPercentage: 1
+  comboData:
+  - name: Combo 1
+    baseAttackPercentage: 1
+    baseAttackSpeedPercentage: 1
+  - name: Combo 2
+    baseAttackPercentage: 1
+    baseAttackSpeedPercentage: 1
+  - name: Combo 3
+    baseAttackPercentage: 1
+    baseAttackSpeedPercentage: 1

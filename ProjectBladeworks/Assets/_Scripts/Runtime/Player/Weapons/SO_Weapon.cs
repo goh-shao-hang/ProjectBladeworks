@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameCells.Player.Weapons
@@ -15,5 +17,26 @@ namespace GameCells.Player.Weapons
         public float comboResetTime = 1.5f;
         public float baseAttackPercentage = 1f;
         public float baseAttackSpeedPercentage = 1f;
+
+        public ComboInstanceData[] comboData;
+
+        private void OnValidate()
+        {
+
+#if UNITY_EDITOR
+
+            int oldLength = comboData.Length;
+
+            if (oldLength != comboCount)
+                Array.Resize(ref comboData, comboCount);
+
+            for (int i = 0; i < comboCount; i++)
+            {
+                comboData[i].name = $"Combo {i + 1}";
+            }
+
+#endif
+
+        }
     }
 }
