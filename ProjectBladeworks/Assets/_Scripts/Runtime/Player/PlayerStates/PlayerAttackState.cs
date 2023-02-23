@@ -18,11 +18,6 @@ namespace GameCells.Player
         public override void Execute()
         {
             base.Execute();
-
-            if (_player.CombatManager.IsNextComboAllowed && _player.InputHandler.AttackInput)
-            {
-                TriggerNextCombo();
-            }
         }
 
         private void TriggerNextCombo()
@@ -40,8 +35,12 @@ namespace GameCells.Player
         public override void CheckSwitchState()
         {
             base.CheckSwitchState();
-            
-            if (_player.CombatManager.IsComboFinished == true)
+
+            if (_player.CombatManager.IsNextComboAllowed && _player.InputHandler.AttackInput) //Consider this as switching to itself
+            {
+                TriggerNextCombo();
+            }
+            else if (_player.CombatManager.IsComboFinished)
             {
                 _ctx.ChangeState(_player.PlayerStateFactory.Movement);
             }
