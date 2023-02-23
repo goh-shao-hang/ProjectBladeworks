@@ -54,8 +54,8 @@ namespace GameCells.Player.Weapons
 
         public void ResetCombo()
         {
-            isNextComboAllowed = true;
             currentComboCount = 0;
+            isNextComboAllowed = true;
         }
         
         public void TriggerCombo()

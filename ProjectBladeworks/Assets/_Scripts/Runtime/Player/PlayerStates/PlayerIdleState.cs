@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameCells.Player
 {
+    [Obsolete] //TODO: Remove soon
     public class PlayerIdleState : PlayerBaseState
     {
         public PlayerIdleState(FiniteStateMachine context, Player player) : base(context, player)
@@ -22,8 +24,8 @@ namespace GameCells.Player
 
         private void UpdateMoveAnimations(Vector3 movement, float damping)
         {
-            _player.Animator.SetFloat(GameData.xMovementHash, movement.x, damping, Time.deltaTime);
-            _player.Animator.SetFloat(GameData.yMovementHash, movement.z, damping, Time.deltaTime);
+            _player.Animator.SetFloat(GameData.XMovementHash, movement.x, damping, Time.deltaTime);
+            _player.Animator.SetFloat(GameData.YMovementHash, movement.z, damping, Time.deltaTime);
         }
 
         public override void CheckSwitchState()
@@ -36,7 +38,7 @@ namespace GameCells.Player
             }
             else if (_player.InputHandler.MovementInput != Vector2.zero)
             {
-                _ctx.ChangeState(_player.PlayerStateFactory.Move);
+                _ctx.ChangeState(_player.PlayerStateFactory.Movement);
             }
         }
     }

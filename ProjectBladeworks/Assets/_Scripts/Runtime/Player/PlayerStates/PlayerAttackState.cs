@@ -12,45 +12,38 @@ namespace GameCells.Player
         {
             base.Enter();
 
-            TriggerCombo();
+            TriggerNextCombo();
         }
 
-        private void AttackFinished()
+        public override void Execute()
         {
-            _player.Animator.SetBool(GameData.isAttackingHash, false);
-            Debug.Log("Finished");
+            base.Execute();
+
+            if (_player.CombatManager.IsNextComboAllowed && _player.InputHandler.AttackInput)
+            {
+                TriggerNextCombo();
+            }
         }
 
-        /*private void AllowNextAttack()
+        private void TriggerNextCombo()
         {
-            
-            _player.Animator.SetBool(GameData.isAttackingHash, false);
-        }*/
+            _player.Animator.SetTrigger(GameData.TriggerComboHash);
+            _player.Animator.SetInteger(GameData.CurrentComboHash, _player.CombatManager.CurrentComboCount);
+            _player.Animator.speed = _player.CombatManager.WeaponData.baseAttackSpeedPercentage;
 
-        private void TriggerCombo()
-        {
             _player.CombatManager.TriggerCombo();
             
-            _player.Animator.speed = _player.CombatManager.WeaponData.baseAttackSpeedPercentage;
-            _player.Animator.SetBool(GameData.isAttackingHash, true);
-            _player.Animator.SetTrigger(GameData.triggerComboHash);
-            _player.Animator.SetInteger(GameData.currentComboHash, _player.CombatManager.CurrentComboCount);
+            //_player.Animator.SetBool(GameData.isAttackingHash, true);
             //_player.Animator.SetBool(GameData.isMovingHash, false);
         }
 
         public override void CheckSwitchState()
         {
             base.CheckSwitchState();
-
-            if (_player.CombatManager.IsNextComboAllowed && _player.InputHandler.AttackInput)
+            
+            if (_player.CombatManager.IsComboFinished == true)
             {
-                TriggerCombo();
-            }
-            else if (_player.CombatManager.IsComboFinished == true)
-            {
-                AttackFinished();
-                _player.Animator.SetInteger(GameData.currentComboHash, _player.CombatManager.CurrentComboCount);
-                _ctx.ChangeState(_player.PlayerStateFactory.Idle);
+                _ctx.ChangeState(_player.PlayerStateFactory.Movement);
             }
         }
     }

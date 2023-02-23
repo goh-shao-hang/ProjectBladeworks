@@ -9,8 +9,7 @@ namespace GameCells.Player
             this._player = player;
         }
 
-        public BaseState Idle => new PlayerIdleState(_context, _player);
-        public BaseState Move => new PlayerMoveState(_context, _player);
+        public BaseState Movement => new PlayerMovementState(_context, _player);
         public BaseState Attack => new PlayerAttackState(_context, _player);
     }
 }
