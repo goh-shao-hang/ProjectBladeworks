@@ -15,5 +15,20 @@ namespace GameCells.Player
         {
             InGameEventsManager.GetInstance().OnAllowNextCombo?.Invoke();
         }
+
+        private void ActivateHitbox()
+        {
+
+        }
+
+        private void DeactivateHitbox()
+        {
+
+        }
+
+        private void ComboStep()
+        {
+
+        }
     }
 }

@@ -1080,7 +1080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e89e2598857fd41996412d85c8a719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: dff92068fb0537a439182c187a551704, type: 2}
+  playerData: {fileID: 11400000, guid: 7832f0f9e74d978468e059d8c81200ee, type: 2}
   _currentEnemyTransform: {fileID: 233658460}
   _gravityEnabled: 1
 --- !u!114 &744529531

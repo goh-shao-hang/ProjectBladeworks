@@ -7,7 +7,7 @@ namespace GameCells.Player
     public class Player : MonoBehaviour
     {
         //Components
-        [SerializeField] private SO_Entity playerData;
+        [SerializeField] private SO_EntityData playerData;
 
         private FiniteStateMachine _stateMachine = new FiniteStateMachine();
         private PlayerStateFactory _playerStateFactory;
@@ -19,7 +19,7 @@ namespace GameCells.Player
         private GroundChecker _playerGroundChecker;
 
         //Component Getters
-        public SO_Entity PlayerData => playerData;
+        public SO_EntityData PlayerData => playerData;
         public PlayerStateFactory PlayerStateFactory => _playerStateFactory ??= new PlayerStateFactory(this._stateMachine, this);
         public IInputHandler InputHandler => _inputHandler ??= GetInputHandler();
         public PlayerWeaponAnimationEventTrigger PlayerAnimationEventTrigger => _playerAnimationEventTrigger ??= GetComponentInChildren<PlayerWeaponAnimationEventTrigger>();
@@ -84,12 +84,17 @@ namespace GameCells.Player
         {
             if (_gravityEnabled)
             {
-                if (!PlayerGroundChecker.CollisionDetected)
+                if (!CharacterController.isGrounded)
                 {
                     _appliedMovement.y += GameData.Gravity * Time.deltaTime;
                 }
+                else
+                {
+                    _appliedMovement.y = -0.1f;
+                }
             }
 
+            Debug.Log(_appliedMovement);
             CharacterController.Move(transform.TransformDirection(_appliedMovement));
         }
 

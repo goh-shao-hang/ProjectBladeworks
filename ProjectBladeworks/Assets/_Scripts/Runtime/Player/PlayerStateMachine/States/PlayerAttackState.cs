@@ -27,9 +27,6 @@ namespace GameCells.Player
             _player.Animator.speed = _player.CombatManager.WeaponData.comboData[_player.CombatManager.CurrentComboCount].baseAttackSpeedPercentage;
 
             _player.CombatManager.TriggerCombo();
-            
-            //_player.Animator.SetBool(GameData.isAttackingHash, true);
-            //_player.Animator.SetBool(GameData.isMovingHash, false);
         }
 
         public override void CheckSwitchState()

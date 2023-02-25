@@ -7,7 +7,7 @@ namespace GameCells.Player.Weapons
 {
     public class CombatManager : MonoBehaviour
     {
-        [SerializeField] private SO_Weapon _weaponData;
+        [SerializeField] private SO_WeaponData _weaponData;
         [SerializeField] private Transform _weaponSocket;
 
         public event Action<RuntimeAnimatorController> OnWeaponEquip;
@@ -17,13 +17,14 @@ namespace GameCells.Player.Weapons
         private bool isComboFinished = false;
         private bool isNextComboAllowed = false;
 
-        public SO_Weapon WeaponData => _weaponData;
+        public SO_WeaponData WeaponData => _weaponData;
         public int CurrentComboCount => currentComboCount;
         public bool IsComboFinished => isComboFinished;
         public bool IsNextComboAllowed => isNextComboAllowed;
 
         private void Start()
         {
+            var allWeaponTypes = Enum.GetNames(typeof(EWeaponType));
             InitializeWeapon();
         }
 
@@ -88,6 +89,7 @@ namespace GameCells.Player.Weapons
 
         private void ComboFinished()
         {
+            Debug.Log("Finished");
             isComboFinished = true;
             isNextComboAllowed = true;
         }

@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EWeaponType
+namespace GameCells.Player.Weapons
 {
-    OneHandedMelee,
-    TwoHandedMelee,
-    Staff
+    public enum EWeaponType
+    {
+        None = 0,
+        OneHandedMelee = 1,
+        TwoHandedMelee = 2,
+        Staff = 4
+    }
 }

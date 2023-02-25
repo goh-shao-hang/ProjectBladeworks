@@ -9,9 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d230303cb747eb4fa72de0dc3c8c1a6, type: 3}
+  m_Script: {fileID: 11500000, guid: da4549f56dbc3614da81b5d0de51903a, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  BaseSpeed: 2
-  BaseATK: 5
-  BaseDEF: 5
+  BaseAttack: 5
+  BaseDefense: 5
+  BaseSpeed: 1.5
+  BaseAttackSpeed: 1
+  SlashDamageBonus: 0
+  BluntDamageBonus: 0
+  ThrustDamageBonus: 0
+  FireDamageBonus: 0
+  IceDamageBonus: 0
+  ThunderDamageBonus: 0
+  SlashDamageResistance: 0
+  BluntDamageResistance: 0
+  ThrustDamageResistance: 0
+  FireDamageResistance: 0
+  IceDamageResistance: 0
+  ThunderDamageResistance: 0

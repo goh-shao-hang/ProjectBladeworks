@@ -27,4 +27,5 @@ public class GameData
     public static readonly int TriggerComboHash = Animator.StringToHash("triggerCombo");
 
     #endregion Animator Hashes
+
 }
