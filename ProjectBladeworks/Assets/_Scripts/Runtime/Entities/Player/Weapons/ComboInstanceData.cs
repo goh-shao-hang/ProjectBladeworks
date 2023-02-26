@@ -9,4 +9,5 @@ public class ComboInstanceData
     [HideInInspector] public string name;
     public float baseAttackPercentage = 1f;
     public float baseAttackSpeedPercentage = 1f;
+    public Vector3 attackMovementDirection;
 }

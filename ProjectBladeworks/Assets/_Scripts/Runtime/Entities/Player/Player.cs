@@ -4,7 +4,7 @@ using GameCells.Player.Weapons;
 
 namespace GameCells.Player
 {
-    public class Player : MonoBehaviour
+    public class Player : Entity
     {
         //Components
         [SerializeField] private SO_EntityData playerData;
@@ -16,7 +16,6 @@ namespace GameCells.Player
         private CombatManager _combatManager;
         private CharacterController _characterController;
         private Animator _animator;
-        private GroundChecker _playerGroundChecker;
 
         //Component Getters
         public SO_EntityData PlayerData => playerData;
@@ -26,14 +25,11 @@ namespace GameCells.Player
         public CombatManager CombatManager => _combatManager ??= GetComponentInChildren<CombatManager>();
         public CharacterController CharacterController => _characterController ??= GetComponent<CharacterController>();
         public Animator Animator => _animator ??= GetComponentInChildren<Animator>();
-        public GroundChecker PlayerGroundChecker => _playerGroundChecker ??= GetComponent<GroundChecker>();
 
         //Variables
         [SerializeField] private Transform _currentEnemyTransform;
-        [SerializeField] private bool _gravityEnabled;
 
         private Vector3 _lookPosition;
-        private Vector3 _appliedMovement;
 
         private void OnEnable()
         {
@@ -52,9 +48,7 @@ namespace GameCells.Player
 
         private void Update()
         {
-            //Debug.Log(_stateMachine.CurrentState);
             _stateMachine.CurrentState.Execute();
-            ApplyMovement();
         }
 
         private void LateUpdate()
@@ -80,38 +74,7 @@ namespace GameCells.Player
             Animator.runtimeAnimatorController = runtimeAnimatorController;
         }
 
-        private void ApplyMovement()
-        {
-            if (_gravityEnabled)
-            {
-                if (!CharacterController.isGrounded)
-                {
-                    _appliedMovement.y += GameData.Gravity * Time.deltaTime;
-                }
-                else
-                {
-                    _appliedMovement.y = -0.1f;
-                }
-            }
-
-            Debug.Log(_appliedMovement);
-            CharacterController.Move(transform.TransformDirection(_appliedMovement));
-        }
-
-        public void SetMovementX(float movement)
-        {
-            _appliedMovement.x = movement;   
-        }
-
-        public void SetMovementY(float movement)
-        {
-            _appliedMovement.y = movement;
-        }
-
-        public void SetMovementZ(float movement)
-        {
-            _appliedMovement.z = movement;
-        }
+        
 
         private void LookAtCurrentEnemy()
         {

@@ -25,9 +25,12 @@ MonoBehaviour:
   - name: Combo 1
     baseAttackPercentage: 1
     baseAttackSpeedPercentage: 1
+    attackMovementDirection: {x: 0, y: 0, z: 3}
   - name: Combo 2
     baseAttackPercentage: 1
     baseAttackSpeedPercentage: 1
+    attackMovementDirection: {x: 0, y: 0, z: 4}
   - name: Combo 3
     baseAttackPercentage: 1
     baseAttackSpeedPercentage: 1
+    attackMovementDirection: {x: 0, y: 5, z: 5}

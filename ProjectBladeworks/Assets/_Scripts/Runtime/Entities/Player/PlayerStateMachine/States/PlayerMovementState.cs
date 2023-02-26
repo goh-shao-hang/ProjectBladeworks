@@ -24,8 +24,8 @@ namespace GameCells.Player
             movement.x = _player.InputHandler.MovementInput.x;
             movement.z = _player.InputHandler.MovementInput.y;
 
-            _player.SetMovementX(_player.PlayerData.BaseSpeed * movement.x * Time.deltaTime);
-            _player.SetMovementZ(_player.PlayerData.BaseSpeed * movement.z * Time.deltaTime);
+            _player.CharacterMovement.SetMovementX(_player.PlayerData.BaseSpeed * movement.x);
+            _player.CharacterMovement.SetMovementZ(_player.PlayerData.BaseSpeed * movement.z);
             UpdateMoveAnimations(movement, GameData.MoveAnimationDampTime);
         }
 

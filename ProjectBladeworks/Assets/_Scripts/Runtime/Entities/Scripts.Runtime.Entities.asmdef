@@ -1,8 +1,7 @@
 {
-    "name": "Scripts.Runtime.Player",
+    "name": "Scripts.Runtime.Entities",
     "rootNamespace": "",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
         "GUID:52b5f36c1bd3cc14fb78890e47913a9e"
     ],
     "includePlatforms": [],

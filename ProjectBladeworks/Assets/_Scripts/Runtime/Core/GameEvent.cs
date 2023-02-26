@@ -24,4 +24,24 @@ namespace GameCells.Core
             gameEvent -= subscriber;
         }
     }
+
+    /*public class GameEvent<T>
+    {
+        private event Action<T> gameEvent;
+
+        public void Invoke(T parameter)
+        {
+            gameEvent.Invoke<T>(parameter);
+        }
+
+        public void AddSubscriber(Action subscriber)
+        {
+            gameEvent += subscriber;
+        }
+
+        public void RemoveSubscriber(Action subscriber)
+        {
+            gameEvent -= subscriber;
+        }
+    }*/
 }
