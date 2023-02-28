@@ -12,12 +12,20 @@ namespace GameCells.Player
         {
             base.Enter();
 
+            _player.CombatManager.RootMotionManager.AllowAnimationMovement(true);
             TriggerNextCombo();
         }
 
         public override void Execute()
         {
             base.Execute();
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+
+            _player.CombatManager.RootMotionManager.AllowAnimationMovement(false);
         }
 
         private void TriggerNextCombo()

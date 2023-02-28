@@ -9,6 +9,7 @@ namespace GameCells.Player.Weapons
     {
         [SerializeField] private SO_WeaponData _weaponData;
         [SerializeField] private Transform _weaponSocket;
+        private RootMotionManager _rootMotionManager;
         private CharacterMovement _characterMovement;
         private PlayerWeaponAnimationEventTrigger _playerWeaponAnimationEventTrigger;
 
@@ -18,6 +19,7 @@ namespace GameCells.Player.Weapons
         private bool _isNextComboAllowed = false;
 
         public SO_WeaponData WeaponData => _weaponData;
+        public RootMotionManager RootMotionManager => _rootMotionManager ??= GetComponentInChildren<RootMotionManager>();
         public CharacterMovement CharacterMovement => GetComponent<CharacterMovement>();
         public PlayerWeaponAnimationEventTrigger PlayerWeaponAnimationEventTrigger => _playerWeaponAnimationEventTrigger ??= GetComponentInChildren<PlayerWeaponAnimationEventTrigger>();
         public int CurrentComboCount => _currentComboCount;
@@ -43,25 +45,17 @@ namespace GameCells.Player.Weapons
         {
             PlayerWeaponAnimationEventTrigger.OnComboFinished += ComboFinished;
             PlayerWeaponAnimationEventTrigger.OnAllowNextCombo += AllowNextCombo;
-            PlayerWeaponAnimationEventTrigger.OnPlayerAttackMovementStart += StartAttackMovement;
-            PlayerWeaponAnimationEventTrigger.OnPlayerAttackMovementEnd += StopAttackMovement;
         }
+
         private void OnDisable()
         {
             PlayerWeaponAnimationEventTrigger.OnComboFinished -= ComboFinished;
             PlayerWeaponAnimationEventTrigger.OnAllowNextCombo -= AllowNextCombo;
-            PlayerWeaponAnimationEventTrigger.OnPlayerAttackMovementStart -= StartAttackMovement;
-            PlayerWeaponAnimationEventTrigger.OnPlayerAttackMovementEnd -= StopAttackMovement;
         }
 
-        private void StartAttackMovement()
+        private void AttackMovement()
         {
-            CharacterMovement.SetMovement(WeaponData.comboData[CurrentComboCount].attackMovementDirection);
-        }
-
-        private void StopAttackMovement()
-        {
-            CharacterMovement.SetMovement(Vector3.zero);
+            
         }
 
         [ContextMenu("Initialize Weapon")]

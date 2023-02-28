@@ -49,10 +49,6 @@ namespace GameCells.Player
             {
                 _ctx.ChangeState(_player.PlayerStateFactory.Attack);
             }
-            /*else if (_player.InputHandler.MovementInput == Vector2.zero)
-            {
-                _ctx.ChangeState(_player.PlayerStateFactory.Idle);
-            }*/
         }
     }
 }

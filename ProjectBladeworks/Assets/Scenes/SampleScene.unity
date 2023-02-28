@@ -1661,7 +1661,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 0dffc0af50006d84db4f1483f424e2ac, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1680,6 +1680,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f1f320d67a3da48974b640f42a5e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1532123509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786714032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 155fcc4bcfb242042b0da286350734a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootTransform: {fileID: 744529527}
+  _animator: {fileID: 1532123507}
 --- !u!4 &1650734230 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: d3e648e76e427ae40996340099298bf8,

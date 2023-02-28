@@ -11,8 +11,10 @@ namespace GameCells.Player
         public event Action OnAllowNextCombo;
         public event Action OnPlayerHitboxActivate;
         public event Action OnPlayerHitboxDeactivate;
-        public event Action OnPlayerAttackMovementStart;
-        public event Action OnPlayerAttackMovementEnd;
+
+        //TODO: resolve attack movement
+        //public event Action OnPlayerAttackMovementStart;
+        //public event Action OnPlayerAttackMovementEnd;
 
         private void AttackFinished()
         {
@@ -34,7 +36,7 @@ namespace GameCells.Player
             OnPlayerHitboxDeactivate?.Invoke();
         }
 
-        private void StartAttackMovement()
+        /*private void StartAttackMovement()
         {
             OnPlayerAttackMovementStart?.Invoke();
         }
@@ -42,6 +44,6 @@ namespace GameCells.Player
         private void StopAttackMovement()
         {
             OnPlayerAttackMovementEnd?.Invoke();
-        }
+        }*/
     }
 }
