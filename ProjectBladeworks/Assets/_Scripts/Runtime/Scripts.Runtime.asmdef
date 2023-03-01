@@ -2,7 +2,8 @@
     "name": "Scripts.Runtime",
     "rootNamespace": "",
     "references": [
-        "GUID:3644c5efdbad277499d9c562fb7c3ef8"
+        "GUID:3644c5efdbad277499d9c562fb7c3ef8",
+        "GUID:6259e8274e21c66dcee2a738f053f486"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

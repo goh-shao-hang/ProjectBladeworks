@@ -6,7 +6,7 @@ public class RootMotionManager : MonoBehaviour
 {
     [SerializeField] private Transform rootTransform;
     [SerializeField] private Animator _animator;
-    [SerializeField] private float animationMovementExaggerationMultiplier = 1f;
+    [SerializeField] private float animationMovementMultiplier = 1f;
     
     private bool _allowAnimationMovement = false;
 
@@ -19,7 +19,7 @@ public class RootMotionManager : MonoBehaviour
     {
         if (_allowAnimationMovement)
         {
-            rootTransform.position += _animator.deltaPosition * animationMovementExaggerationMultiplier;
+            rootTransform.position += _animator.deltaPosition * animationMovementMultiplier;
         }
     }
 }
