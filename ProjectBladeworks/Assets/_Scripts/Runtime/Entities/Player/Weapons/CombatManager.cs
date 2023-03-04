@@ -9,6 +9,7 @@ namespace GameCells.Player.Weapons
     {
         [SerializeField] private SO_WeaponData _weaponData;
         [SerializeField] private Transform _weaponSocket;
+        private WeaponHitbox _currentWeaponHitbox;
         private RootMotionManager _rootMotionManager;
         private CharacterMovement _characterMovement;
         private PlayerWeaponAnimationEventTrigger _playerWeaponAnimationEventTrigger;
@@ -28,6 +29,8 @@ namespace GameCells.Player.Weapons
 
         public event Action<RuntimeAnimatorController> OnWeaponEquip;
 
+        #region CallBacks
+
         private void Start()
         {
             InitializeWeapon();
@@ -45,18 +48,19 @@ namespace GameCells.Player.Weapons
         {
             PlayerWeaponAnimationEventTrigger.OnComboFinished += ComboFinished;
             PlayerWeaponAnimationEventTrigger.OnAllowNextCombo += AllowNextCombo;
+            PlayerWeaponAnimationEventTrigger.OnPlayerHitboxActivate += ActivateWeaponHitbox;
+            PlayerWeaponAnimationEventTrigger.OnPlayerHitboxDeactivate += DeactivateWeaponHitbox;
         }
 
         private void OnDisable()
         {
             PlayerWeaponAnimationEventTrigger.OnComboFinished -= ComboFinished;
             PlayerWeaponAnimationEventTrigger.OnAllowNextCombo -= AllowNextCombo;
+            PlayerWeaponAnimationEventTrigger.OnPlayerHitboxActivate -= ActivateWeaponHitbox;
+            PlayerWeaponAnimationEventTrigger.OnPlayerHitboxDeactivate -= DeactivateWeaponHitbox;
         }
 
-        private void AttackMovement()
-        {
-            
-        }
+        #endregion
 
         [ContextMenu("Initialize Weapon")]
         private void InitializeWeapon()
@@ -68,15 +72,12 @@ namespace GameCells.Player.Weapons
             }
 
             GameObject newWeapon = Instantiate(_weaponData.WeaponMesh, _weaponSocket);
+            _currentWeaponHitbox = newWeapon.GetComponentInChildren<WeaponHitbox>();
             _currentComboCount = 0;
             OnWeaponEquip?.Invoke(_weaponData.PlayerRuntimeAnimatorController);
         }
 
-        public void ResetCombo()
-        {
-            _currentComboCount = 0;   
-        }
-        
+        #region Combo
         public void TriggerCombo()
         {
             _isComboFinished = false;
@@ -100,9 +101,13 @@ namespace GameCells.Player.Weapons
 
         private void ComboFinished()
         {
-            Debug.Log("Finished");
             _isComboFinished = true;
             _isNextComboAllowed = true;
+        }
+
+        public void ResetCombo()
+        {
+            _currentComboCount = 0;
         }
 
 
@@ -114,5 +119,21 @@ namespace GameCells.Player.Weapons
             _comboTimerCO = null;
             ResetCombo();
         }
+
+        #endregion
+
+        #region Hitbox
+
+        public void ActivateWeaponHitbox()
+        {
+            _currentWeaponHitbox.Activate();
+        }
+
+        public void DeactivateWeaponHitbox()
+        {
+            _currentWeaponHitbox.Deactivate();
+        }
+
+        #endregion
     }
 }

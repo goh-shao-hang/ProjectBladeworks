@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BaseAttack: 5
   BaseDefense: 5
-  BaseSpeed: 1.5
+  BaseSpeed: 5
   BaseAttackSpeed: 1
   SlashDamageBonus: 0
   BluntDamageBonus: 0
