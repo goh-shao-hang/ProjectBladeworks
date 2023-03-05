@@ -6,9 +6,6 @@ namespace GameCells.Player
 {
     public class Player : Entity
     {
-        //Components
-        [SerializeField] private SO_EntityData playerData;
-
         private FiniteStateMachine _stateMachine = new FiniteStateMachine();
         private PlayerStateFactory _playerStateFactory;
         private IInputHandler _inputHandler;
@@ -18,7 +15,6 @@ namespace GameCells.Player
         private Animator _animator;
 
         //Component Getters
-        public SO_EntityData PlayerData => playerData;
         public PlayerStateFactory PlayerStateFactory => _playerStateFactory ??= new PlayerStateFactory(this._stateMachine, this);
         public IInputHandler InputHandler => _inputHandler ??= GetInputHandler();
         public PlayerWeaponAnimationEventTrigger PlayerAnimationEventTrigger => _playerAnimationEventTrigger ??= GetComponentInChildren<PlayerWeaponAnimationEventTrigger>();

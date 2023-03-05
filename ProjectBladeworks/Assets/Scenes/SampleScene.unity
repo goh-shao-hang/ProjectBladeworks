@@ -1424,7 +1424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e89e2598857fd41996412d85c8a719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 7832f0f9e74d978468e059d8c81200ee, type: 2}
+  _entityData: {fileID: 11400000, guid: 7832f0f9e74d978468e059d8c81200ee, type: 2}
   _currentEnemyTransform: {fileID: 233658460}
 --- !u!114 &744529531
 MonoBehaviour:
