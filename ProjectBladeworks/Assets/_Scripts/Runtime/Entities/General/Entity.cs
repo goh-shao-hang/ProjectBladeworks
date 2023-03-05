@@ -6,8 +6,8 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     [SerializeField] private SO_EntityData _entityData;
-    private CharacterMovement _characterMovement;
+    private EB_CharacterMovement _characterMovement;
 
     public SO_EntityData EntityData => _entityData;
-    public CharacterMovement CharacterMovement => _characterMovement ??= GetComponent<CharacterMovement>();
+    public EB_CharacterMovement CharacterMovement => _characterMovement ??= GetComponent<EB_CharacterMovement>();
 }

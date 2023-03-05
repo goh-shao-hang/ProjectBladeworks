@@ -11,7 +11,7 @@ namespace GameCells.Player.Weapons
         [SerializeField] private Transform _weaponSocket;
         private Weapon _currentWeaponHitbox;
         private RootMotionManager _rootMotionManager;
-        private CharacterMovement _characterMovement;
+        private EB_CharacterMovement _characterMovement;
         private PlayerWeaponAnimationEventTrigger _playerWeaponAnimationEventTrigger;
 
         private Coroutine _comboTimerCO;
@@ -21,7 +21,7 @@ namespace GameCells.Player.Weapons
 
         public SO_WeaponData WeaponData => _weaponData;
         public RootMotionManager RootMotionManager => _rootMotionManager ??= GetComponentInChildren<RootMotionManager>();
-        public CharacterMovement CharacterMovement => GetComponent<CharacterMovement>();
+        public EB_CharacterMovement CharacterMovement => GetComponent<EB_CharacterMovement>();
         public PlayerWeaponAnimationEventTrigger PlayerWeaponAnimationEventTrigger => _playerWeaponAnimationEventTrigger ??= GetComponentInChildren<PlayerWeaponAnimationEventTrigger>();
         public int CurrentComboCount => _currentComboCount;
         public bool IsComboFinished => _isComboFinished;

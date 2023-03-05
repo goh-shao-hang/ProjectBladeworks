@@ -1235,6 +1235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 560960697}
   - component: {fileID: 560960696}
+  - component: {fileID: 560960698}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -1296,6 +1297,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &560960698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560960695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &681190223
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,7 +1473,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 744529523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfd19f9e95e5cd942b425e547a522933, type: 3}
+  m_Script: {fileID: 11500000, guid: 273af34dde5d39346a909e9f70629d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _gravityEnabled: 1
@@ -2397,11 +2421,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 16579244}
     m_Modifications:
-    - target: {fileID: 610658962810282236, guid: 1aa45254fb3172641a5c739eb2808c6c,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5838239986700969002, guid: 1aa45254fb3172641a5c739eb2808c6c,
         type: 3}
       propertyPath: m_RootOrder
