@@ -10,7 +10,7 @@ namespace GameCells.Player.Weapons
         public string WeaponName;
         public ERarity Rarity;
         public EWeaponType WeaponType;
-        public GameObject WeaponMesh;
+        public GameObject WeaponPrefab;
         public RuntimeAnimatorController PlayerRuntimeAnimatorController;
 
         public int comboCount = 3;

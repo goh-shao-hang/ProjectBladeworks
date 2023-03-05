@@ -15,7 +15,7 @@ MonoBehaviour:
   WeaponName: Katana
   Rarity: 1
   WeaponType: 1
-  WeaponMesh: {fileID: 8540147843163138399, guid: e791b85609147d8478d645ff98de7f05,
+  WeaponPrefab: {fileID: 8540147843163138399, guid: e791b85609147d8478d645ff98de7f05,
     type: 3}
   PlayerRuntimeAnimatorController: {fileID: 22100000, guid: ce3a0ea69788072468cede2fbf3b7175,
     type: 2}
@@ -25,9 +25,12 @@ MonoBehaviour:
   - name: Combo 1
     baseAttackPercentage: 1
     baseAttackSpeedPercentage: 1
+    attackMovementDirection: {x: 0, y: 0, z: 0}
   - name: Combo 2
     baseAttackPercentage: 1
-    baseAttackSpeedPercentage: 1
+    baseAttackSpeedPercentage: 5
+    attackMovementDirection: {x: 0, y: 0, z: 0}
   - name: Combo 3
     baseAttackPercentage: 1
-    baseAttackSpeedPercentage: 1
+    baseAttackSpeedPercentage: 5
+    attackMovementDirection: {x: 0, y: 0, z: 0}

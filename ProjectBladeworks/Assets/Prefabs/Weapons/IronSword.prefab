@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1268894144631905344}
   - component: {fileID: 610658962810282236}
-  - component: {fileID: 514090154446730159}
   m_Layer: 6
   m_Name: Hitbox
   m_TagString: Untagged
@@ -46,24 +45,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 1, z: 0.1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &514090154446730159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991832437583821132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 078ad8e96bb913849992192772db1fd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Hitbox>k__BackingField: {fileID: 610658962810282236}
-  _boxcastThickness: 0.025
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 128
-  isActive: 0
 --- !u!1 &6507218747801648784
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,6 +56,7 @@ GameObject:
   - component: {fileID: 5838239986700969002}
   - component: {fileID: 7397799832754449295}
   - component: {fileID: 4705897162307084101}
+  - component: {fileID: 4301430848657181989}
   m_Layer: 6
   m_Name: IronSword
   m_TagString: Untagged
@@ -148,3 +130,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4301430848657181989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6507218747801648784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b9d1ebc70406e489ced0f9b10267b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <WeaponHitbox>k__BackingField: {fileID: 610658962810282236}
+  damageableLayer:
+    serializedVersion: 2
+    m_Bits: 128

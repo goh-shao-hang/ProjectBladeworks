@@ -26,6 +26,7 @@ namespace GameCells.Player
 
             _player.CharacterMovement.SetMovementX(_player.PlayerData.BaseSpeed * movement.x);
             _player.CharacterMovement.SetMovementZ(_player.PlayerData.BaseSpeed * movement.z);
+            _player.Animator.SetFloat(GameData.MoveSpeedHash, _player.PlayerData.BaseSpeed);
             UpdateMoveAnimations(movement, GameData.MoveAnimationDampTime);
         }
 

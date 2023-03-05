@@ -32,7 +32,7 @@ namespace GameCells.Player
         {
             _player.Animator.SetTrigger(GameData.TriggerComboHash);
             _player.Animator.SetInteger(GameData.CurrentComboHash, _player.CombatManager.CurrentComboCount);
-            _player.Animator.speed = _player.CombatManager.WeaponData.comboData[_player.CombatManager.CurrentComboCount].baseAttackSpeedPercentage;
+            _player.Animator.SetFloat(GameData.AttackSpeedHash, _player.CombatManager.WeaponData.comboData[_player.CombatManager.CurrentComboCount].baseAttackSpeedPercentage);
 
             _player.CombatManager.TriggerCombo();
         }
@@ -47,6 +47,7 @@ namespace GameCells.Player
             }
             else if (_player.CombatManager.IsComboFinished)
             {
+                _player.Animator.SetFloat(GameData.AttackSpeedHash, 1f);
                 _ctx.ChangeState(_player.PlayerStateFactory.Movement);
             }
         }

@@ -25,6 +25,8 @@ public class GameData
     public static readonly int AttackHash = Animator.StringToHash("attack");
     public static readonly int CurrentComboHash = Animator.StringToHash("currentCombo");
     public static readonly int TriggerComboHash = Animator.StringToHash("triggerCombo");
+    public static readonly int AttackSpeedHash = Animator.StringToHash("attackSpeed");
+    public static readonly int MoveSpeedHash = Animator.StringToHash("moveSpeed");
 
     #endregion Animator Hashes
 

@@ -15,7 +15,7 @@ MonoBehaviour:
   WeaponName: Iron Sword
   Rarity: 0
   WeaponType: 1
-  WeaponMesh: {fileID: 6507218747801648784, guid: 1aa45254fb3172641a5c739eb2808c6c,
+  WeaponPrefab: {fileID: 6507218747801648784, guid: 1aa45254fb3172641a5c739eb2808c6c,
     type: 3}
   PlayerRuntimeAnimatorController: {fileID: 22100000, guid: 33f9bae52e724b54588a4bf9e4165255,
     type: 2}

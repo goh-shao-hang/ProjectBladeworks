@@ -9,7 +9,7 @@ namespace GameCells.Player.Weapons
     {
         [SerializeField] private SO_WeaponData _weaponData;
         [SerializeField] private Transform _weaponSocket;
-        private WeaponHitbox _currentWeaponHitbox;
+        private Weapon _currentWeaponHitbox;
         private RootMotionManager _rootMotionManager;
         private CharacterMovement _characterMovement;
         private PlayerWeaponAnimationEventTrigger _playerWeaponAnimationEventTrigger;
@@ -71,8 +71,8 @@ namespace GameCells.Player.Weapons
                 Destroy(_weaponSocket.GetChild(0).gameObject);
             }
 
-            GameObject newWeapon = Instantiate(_weaponData.WeaponMesh, _weaponSocket);
-            _currentWeaponHitbox = newWeapon.GetComponentInChildren<WeaponHitbox>();
+            GameObject newWeapon = Instantiate(_weaponData.WeaponPrefab, _weaponSocket);
+            _currentWeaponHitbox = newWeapon.GetComponentInChildren<Weapon>();
             _currentComboCount = 0;
             OnWeaponEquip?.Invoke(_weaponData.PlayerRuntimeAnimatorController);
         }
