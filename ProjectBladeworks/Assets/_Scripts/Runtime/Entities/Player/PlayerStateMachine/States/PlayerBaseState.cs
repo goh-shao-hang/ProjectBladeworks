@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameCells.Player
+namespace GameCells.Entities.Player
 {
     public class PlayerBaseState : BaseState
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RootMotionManager : MonoBehaviour
+public class PlayerRootMotionManager : MonoBehaviour
 {
     [SerializeField] private Transform rootTransform;
     [SerializeField] private Animator _animator;

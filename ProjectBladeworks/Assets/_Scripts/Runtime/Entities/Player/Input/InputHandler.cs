@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace GameCells.Player.Input
+namespace GameCells.Entities.Player.Input
 {
     public class InputHandler : Singleton<InputHandler>
     {

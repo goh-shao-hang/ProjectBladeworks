@@ -1,4 +1,4 @@
-namespace GameCells.Player
+namespace GameCells.Entities.Player
 {
     public class PlayerStateFactory : StateFactory
     {

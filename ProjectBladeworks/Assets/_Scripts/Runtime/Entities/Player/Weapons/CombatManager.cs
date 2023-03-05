@@ -1,18 +1,18 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using GameCells.Core;
+using GameCells.Entities.Behaviour;
 
-namespace GameCells.Player.Weapons
+namespace GameCells.Entities.Player.Weapons
 {
     public class CombatManager : MonoBehaviour
     {
         [SerializeField] private SO_WeaponData _weaponData;
         [SerializeField] private Transform _weaponSocket;
-        private Weapon _currentWeaponHitbox;
-        private RootMotionManager _rootMotionManager;
-        private EB_CharacterMovement _characterMovement;
+        private Weapon _currentWeapon;
+        private PlayerRootMotionManager _playerRootMotionManager;
         private PlayerWeaponAnimationEventTrigger _playerWeaponAnimationEventTrigger;
+        private EB_CameraShakeSource _cameraShakeSource;
 
         private Coroutine _comboTimerCO;
         private int _currentComboCount;
@@ -20,9 +20,9 @@ namespace GameCells.Player.Weapons
         private bool _isNextComboAllowed = false;
 
         public SO_WeaponData WeaponData => _weaponData;
-        public RootMotionManager RootMotionManager => _rootMotionManager ??= GetComponentInChildren<RootMotionManager>();
-        public EB_CharacterMovement CharacterMovement => GetComponent<EB_CharacterMovement>();
+        public PlayerRootMotionManager PlayerRootMotionManager => _playerRootMotionManager ??= GetComponentInChildren<PlayerRootMotionManager>();
         public PlayerWeaponAnimationEventTrigger PlayerWeaponAnimationEventTrigger => _playerWeaponAnimationEventTrigger ??= GetComponentInChildren<PlayerWeaponAnimationEventTrigger>();
+        public EB_CameraShakeSource cameraShakeSource => _cameraShakeSource ??= GetComponentInChildren<EB_CameraShakeSource>();
         public int CurrentComboCount => _currentComboCount;
         public bool IsComboFinished => _isComboFinished;
         public bool IsNextComboAllowed => _isNextComboAllowed;
@@ -50,6 +50,11 @@ namespace GameCells.Player.Weapons
             PlayerWeaponAnimationEventTrigger.OnAllowNextCombo += AllowNextCombo;
             PlayerWeaponAnimationEventTrigger.OnPlayerHitboxActivate += ActivateWeaponHitbox;
             PlayerWeaponAnimationEventTrigger.OnPlayerHitboxDeactivate += DeactivateWeaponHitbox;
+
+            if (_currentWeapon != null)
+            {
+                _currentWeapon.OnWeaponHit += HandleWeaponHit;
+            }
         }
 
         private void OnDisable()
@@ -58,6 +63,11 @@ namespace GameCells.Player.Weapons
             PlayerWeaponAnimationEventTrigger.OnAllowNextCombo -= AllowNextCombo;
             PlayerWeaponAnimationEventTrigger.OnPlayerHitboxActivate -= ActivateWeaponHitbox;
             PlayerWeaponAnimationEventTrigger.OnPlayerHitboxDeactivate -= DeactivateWeaponHitbox;
+
+            if (_currentWeapon != null)
+            {
+                _currentWeapon.OnWeaponHit -= HandleWeaponHit;
+            }
         }
 
         #endregion
@@ -65,16 +75,28 @@ namespace GameCells.Player.Weapons
         [ContextMenu("Initialize Weapon")]
         private void InitializeWeapon()
         {
+            if (_currentWeapon != null)
+            {
+                _currentWeapon.OnWeaponHit -= HandleWeaponHit;
+            }
+
             int count = _weaponSocket.childCount;
             for (int i = 0; i < _weaponSocket.childCount; i++)
             {
-                Destroy(_weaponSocket.GetChild(0).gameObject);
+                Destroy(_weaponSocket.GetChild(i).gameObject);
             }
 
-            GameObject newWeapon = Instantiate(_weaponData.WeaponPrefab, _weaponSocket);
-            _currentWeaponHitbox = newWeapon.GetComponentInChildren<Weapon>();
-            _currentComboCount = 0;
+            _currentWeapon = Instantiate(_weaponData.WeaponPrefab, _weaponSocket).GetComponent<Weapon>();
             OnWeaponEquip?.Invoke(_weaponData.PlayerRuntimeAnimatorController);
+            _currentWeapon.OnWeaponHit += HandleWeaponHit;
+
+            _currentComboCount = 0;
+        }
+
+        private void HandleWeaponHit()
+        {
+            //TODO: this should be handled by the victim, not the attacker. fix this soon
+            cameraShakeSource?.CameraShake();
         }
 
         #region Combo
@@ -126,12 +148,12 @@ namespace GameCells.Player.Weapons
 
         public void ActivateWeaponHitbox()
         {
-            _currentWeaponHitbox.Activate();
+            _currentWeapon.Activate();
         }
 
         public void DeactivateWeaponHitbox()
         {
-            _currentWeaponHitbox.Deactivate();
+            _currentWeapon.Deactivate();
         }
 
         #endregion

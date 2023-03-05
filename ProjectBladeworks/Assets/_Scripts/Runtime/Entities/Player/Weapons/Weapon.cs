@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public event Action OnWeaponHit;
+
     [field: SerializeField] public BoxCollider WeaponHitbox { get; private set; }
     [SerializeField] private LayerMask damageableLayer;
 
@@ -26,6 +28,7 @@ public class Weapon : MonoBehaviour
                 if (hitTargets.Contains(detectedTargets[i])) continue;
                 hitTargets.Add(detectedTargets[i]);
                 Debug.Log(detectedTargets[i] + "hit!");
+                OnWeaponHit?.Invoke();
             }
         }
     }

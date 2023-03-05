@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Etouch = UnityEngine.InputSystem.EnhancedTouch;
 
-namespace GameCells.Player.Input
+namespace GameCells.Entities.Player.Input
 {
     public class TouchInputJoystick : MonoBehaviour//, IInputHandler
     {

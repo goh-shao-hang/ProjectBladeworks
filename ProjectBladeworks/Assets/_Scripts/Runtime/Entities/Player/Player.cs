@@ -1,8 +1,8 @@
 using UnityEngine;
-using GameCells.Player.Input;
-using GameCells.Player.Weapons;
+using GameCells.Entities.Player.Input;
+using GameCells.Entities.Player.Weapons;
 
-namespace GameCells.Player
+namespace GameCells.Entities.Player
 {
     public class Player : Entity
     {

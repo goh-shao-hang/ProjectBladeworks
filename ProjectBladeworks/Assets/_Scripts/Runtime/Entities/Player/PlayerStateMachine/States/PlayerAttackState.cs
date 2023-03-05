@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GameCells.Player
+namespace GameCells.Entities.Player
 {
     public class PlayerAttackState : PlayerBaseState
     {
@@ -12,7 +12,7 @@ namespace GameCells.Player
         {
             base.Enter();
 
-            _player.CombatManager.RootMotionManager.AllowAnimationMovement(true);
+            _player.CombatManager.PlayerRootMotionManager.AllowAnimationMovement(true);
             TriggerNextCombo();
         }
 
@@ -25,7 +25,7 @@ namespace GameCells.Player
         {
             base.Exit();
 
-            _player.CombatManager.RootMotionManager.AllowAnimationMovement(false);
+            _player.CombatManager.PlayerRootMotionManager.AllowAnimationMovement(false);
         }
 
         private void TriggerNextCombo()

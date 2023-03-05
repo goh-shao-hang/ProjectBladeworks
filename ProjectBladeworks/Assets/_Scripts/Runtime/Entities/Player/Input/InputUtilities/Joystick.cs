@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameCells.Player.Input
+namespace GameCells.Entities.Player.Input
 {
     public class Joystick : MonoBehaviour
     {

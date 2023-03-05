@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using GameCells.Core;
 
-namespace GameCells.Player
+namespace GameCells.Entities.Player
 {
     public class PlayerWeaponAnimationEventTrigger : MonoBehaviour
     {
@@ -11,10 +11,6 @@ namespace GameCells.Player
         public event Action OnAllowNextCombo;
         public event Action OnPlayerHitboxActivate;
         public event Action OnPlayerHitboxDeactivate;
-
-        //TODO: resolve attack movement
-        //public event Action OnPlayerAttackMovementStart;
-        //public event Action OnPlayerAttackMovementEnd;
 
         private void AttackFinished()
         {

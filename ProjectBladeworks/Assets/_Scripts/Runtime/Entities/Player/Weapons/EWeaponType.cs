@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameCells.Player.Weapons
+namespace GameCells.Entities.Player.Weapons
 {
     public enum EWeaponType
     {

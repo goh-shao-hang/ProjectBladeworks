@@ -1,11 +1,15 @@
+using GameCells.Entities.Behaviour;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameCells.Player
+namespace GameCells.Entities.Player
 {
     public class PlayerMovementState : PlayerBaseState
     {
+        private EB_CharacterMovement _characterMovement;
+        private EB_CharacterMovement characterMovement => _characterMovement ??= _player.EntityBehaviourManager.GetEntityBehaviour<EB_CharacterMovement>();
+
         private Vector3 movement;
 
         public PlayerMovementState(FiniteStateMachine context, Player player) : base(context, player)
@@ -24,8 +28,8 @@ namespace GameCells.Player
             movement.x = _player.InputHandler.MovementInput.x;
             movement.z = _player.InputHandler.MovementInput.y;
 
-            _player.CharacterMovement.SetMovementX(_player.EntityData.BaseSpeed * movement.x);
-            _player.CharacterMovement.SetMovementZ(_player.EntityData.BaseSpeed * movement.z);
+            characterMovement.SetMovementX(_player.EntityData.BaseSpeed * movement.x);
+            characterMovement.SetMovementZ(_player.EntityData.BaseSpeed * movement.z);
             _player.Animator.SetFloat(GameData.MoveSpeedHash, _player.EntityData.BaseSpeed);
             UpdateMoveAnimations(movement, GameData.MoveAnimationDampTime);
         }

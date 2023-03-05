@@ -2,61 +2,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EB_CharacterMovement : MonoBehaviour
+namespace GameCells.Entities.Behaviour
 {
-    [SerializeField] private bool _gravityEnabled;
-
-    private CharacterController _characterController;
-    public CharacterController CharacterController => _characterController ??= GetComponent<CharacterController>();
-
-    private bool _overrideYMovement = false;
-    private Vector3 _appliedMovement;
-    public Vector3 AppliedMovement => _appliedMovement;
-
-    private void Update()
+    public class EB_CharacterMovement : EntityBehaviour
     {
-        ApplyMovement();
-    }
+        [SerializeField] private bool _gravityEnabled;
 
-    public void OverrideYMovement(bool overrideYMovement)
-    {
-        _overrideYMovement = overrideYMovement;
-    }
+        private CharacterController _characterController;
+        public CharacterController CharacterController => _characterController ??= GetComponentInParent<CharacterController>();
 
-    private void ApplyMovement()
-    {
-        if (_gravityEnabled )//&& !_overrideYMovement)
+        private bool _overrideYMovement = false;
+        private Vector3 _appliedMovement;
+        public Vector3 AppliedMovement => _appliedMovement;
+
+        private void Update()
         {
-            if (!CharacterController.isGrounded)
-            {
-                _appliedMovement.y += GameData.Gravity * Time.deltaTime;
-            }
-            else if (!_overrideYMovement)
-            {
-                _appliedMovement.y = -0.2f;
-            }
+            ApplyMovement();
         }
 
-        CharacterController.Move(transform.TransformDirection(_appliedMovement * Time.deltaTime));
-    }
+        public void OverrideYMovement(bool overrideYMovement)
+        {
+            _overrideYMovement = overrideYMovement;
+        }
 
-    public void SetMovement(Vector3 movement)
-    {
-        _appliedMovement = movement;
-    }
+        private void ApplyMovement()
+        {
+            if (_gravityEnabled)//&& !_overrideYMovement)
+            {
+                if (!CharacterController.isGrounded)
+                {
+                    _appliedMovement.y += GameData.Gravity * Time.deltaTime;
+                }
+                else if (!_overrideYMovement)
+                {
+                    _appliedMovement.y = -0.2f;
+                }
+            }
 
-    public void SetMovementX(float xMovement)
-    {
-        _appliedMovement.x = xMovement;
-    }
+            CharacterController.Move(transform.TransformDirection(_appliedMovement * Time.deltaTime));
+        }
 
-    public void SetMovementY(float yMovement)
-    {
-        _appliedMovement.y = yMovement;
-    }
+        public void SetMovement(Vector3 movement)
+        {
+            _appliedMovement = movement;
+        }
 
-    public void SetMovementZ(float zMovement)
-    {
-        _appliedMovement.z = zMovement;
+        public void SetMovementX(float xMovement)
+        {
+            _appliedMovement.x = xMovement;
+        }
+
+        public void SetMovementY(float yMovement)
+        {
+            _appliedMovement.y = yMovement;
+        }
+
+        public void SetMovementZ(float zMovement)
+        {
+            _appliedMovement.z = zMovement;
+        }
     }
 }

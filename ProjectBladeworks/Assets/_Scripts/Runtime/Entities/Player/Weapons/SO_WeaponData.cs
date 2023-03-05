@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameCells.Player.Weapons
+namespace GameCells.Entities.Player.Weapons
 {
     [CreateAssetMenu(fileName = "WeaponData", menuName = "Scriptable Objects/Data/Weapon Data")]
     public class SO_WeaponData : ScriptableObject

@@ -2,7 +2,8 @@
     "name": "Scripts.Runtime.Entities",
     "rootNamespace": "",
     "references": [
-        "GUID:52b5f36c1bd3cc14fb78890e47913a9e"
+        "GUID:52b5f36c1bd3cc14fb78890e47913a9e",
+        "GUID:4307f53044263cf4b835bd812fc161a4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
