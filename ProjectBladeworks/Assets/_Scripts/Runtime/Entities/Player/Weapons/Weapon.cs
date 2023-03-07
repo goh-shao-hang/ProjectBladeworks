@@ -3,50 +3,104 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+namespace GameCells.Entities.Player.Weapons
 {
-    public event Action OnWeaponHit;
-
-    [field: SerializeField] public BoxCollider WeaponHitbox { get; private set; }
-    [SerializeField] private LayerMask damageableLayer;
-
-    private bool isActive = false;
-    private List<Collider> hitTargets = new List<Collider>();
-    private Collider[] detectedTargets = new Collider[10];
-    private Vector3 _hitboxSize;
-
-    private void FixedUpdate()
+    public class Weapon : MonoBehaviour
     {
-        if (isActive)
-        {
-            Vector3 hitboxCenter = transform.TransformPoint(WeaponHitbox.center);
+        public event Action OnWeaponHit;
 
-            int detectedCount = Physics.OverlapBoxNonAlloc(hitboxCenter, _hitboxSize * 0.5f, detectedTargets, transform.rotation, damageableLayer);
-            for (int i = 0; i < detectedCount; i++)
+        [Header("Hitbox")]
+        [SerializeField] private BoxCollider _weaponHitbox;
+        [SerializeField] private LayerMask _damageableLayer;
+
+        [Header("Trail Rendering")]
+        [SerializeField] private bool _emitTrail;
+        [SerializeField] private TrailRenderer _trailRenderer;
+
+        private bool isActive = false;
+
+        public BoxCollider WeaponHitbox => _weaponHitbox;
+        public TrailRenderer TrailRenderer => _trailRenderer;
+
+        //Hitbox
+        private List<Collider> hitTargets = new List<Collider>();
+        private Collider[] detectedTargets = new Collider[10];
+        private Vector3 _hitboxSize;
+
+        //Trail VFX
+        private Coroutine _stopTrailCO = null;
+
+        private void FixedUpdate()
+        {
+            if (isActive)
             {
-                if (detectedTargets[i] == null) continue;
-                if (hitTargets.Contains(detectedTargets[i])) continue;
-                hitTargets.Add(detectedTargets[i]);
-                Debug.Log(detectedTargets[i] + "hit!");
-                OnWeaponHit?.Invoke();
+                Vector3 hitboxCenter = transform.TransformPoint(_weaponHitbox.center);
+
+                int detectedCount = Physics.OverlapBoxNonAlloc(hitboxCenter, _hitboxSize * 0.5f, detectedTargets, transform.rotation, _damageableLayer);
+                for (int i = 0; i < detectedCount; i++)
+                {
+                    if (detectedTargets[i] == null) continue;
+                    if (hitTargets.Contains(detectedTargets[i])) continue;
+                    hitTargets.Add(detectedTargets[i]);
+                    Debug.Log(detectedTargets[i] + "hit!");
+                    OnWeaponHit?.Invoke();
+                }
             }
         }
-    }
 
-    public void Activate()
-    {
-        isActive = true;
-        hitTargets.Clear();
-        _hitboxSize.Set(
-            WeaponHitbox.size.x * transform.lossyScale.x,
-            WeaponHitbox.size.y * transform.lossyScale.y,
-            WeaponHitbox.size.z * transform.lossyScale.z
-            );
-    }
+        public void Activate()
+        {
+            isActive = true;
+            hitTargets.Clear();
 
-    public void Deactivate()
-    {
-        isActive = false;
-        hitTargets.Clear();
+            _hitboxSize.Set(
+                _weaponHitbox.size.x * transform.lossyScale.x,
+                _weaponHitbox.size.y * transform.lossyScale.y,
+                _weaponHitbox.size.z * transform.lossyScale.z
+                );
+
+            StartEmittingTrail();
+        }
+
+        public void Deactivate()
+        {
+            isActive = false;
+            hitTargets.Clear();
+
+            StopEmittingTrail();            
+        }
+
+        private void StartEmittingTrail()
+        {
+            if (_emitTrail && _trailRenderer != null)
+            {
+                if (_stopTrailCO != null)
+                {
+                    StopCoroutine(_stopTrailCO);
+                    _stopTrailCO = null;
+                }
+                _trailRenderer.enabled = true;
+            }
+        }
+
+        private void StopEmittingTrail()
+        {
+            if (_emitTrail && _trailRenderer != null)
+            {
+                if (_stopTrailCO != null)
+                {
+                    StopCoroutine(_stopTrailCO);
+                    _stopTrailCO = null;
+                }
+
+                _stopTrailCO = StartCoroutine(StopTrailCO());
+            }
+        }
+
+        private IEnumerator StopTrailCO()
+        {
+            yield return WaitHandler.GetWaitForSeconds(_trailRenderer.time);
+            _trailRenderer.enabled = false;
+        }
     }
 }

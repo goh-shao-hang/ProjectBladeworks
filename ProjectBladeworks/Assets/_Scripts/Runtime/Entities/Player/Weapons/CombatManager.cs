@@ -7,6 +7,9 @@ namespace GameCells.Entities.Player.Weapons
 {
     public class CombatManager : MonoBehaviour
     {
+        //TODO: REMOVE
+        [SerializeField] private GameObject testHitSparks;
+
         [SerializeField] private SO_WeaponData _weaponData;
         [SerializeField] private Transform _weaponSocket;
         private Weapon _currentWeapon;
@@ -97,6 +100,11 @@ namespace GameCells.Entities.Player.Weapons
         {
             //TODO: this should be handled by the victim, not the attacker. fix this soon
             cameraShakeSource?.CameraShake();
+
+            //TODO: REMOVE
+            var sparks = Instantiate(testHitSparks, _currentWeapon.transform);
+            sparks.transform.SetParent(null);
+            Destroy(sparks, 1f);
         }
 
         #region Combo

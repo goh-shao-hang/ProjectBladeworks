@@ -11,9 +11,10 @@ namespace GameCells.Entities.Behaviour
         private CinemachineImpulseSource _cinemachineImpulseSource;
         private CinemachineImpulseSource cinemachineImpulseSource => _cinemachineImpulseSource ??= GetComponent<CinemachineImpulseSource>();
 
-        public void CameraShake()
+        public void CameraShake(float strength = 1)
         {
-            cinemachineImpulseSource.GenerateImpulse();
+            strength = Mathf.Clamp(strength, 0.1f, 10f);
+            cinemachineImpulseSource.GenerateImpulseWithForce(strength);
         }
     }
 }
