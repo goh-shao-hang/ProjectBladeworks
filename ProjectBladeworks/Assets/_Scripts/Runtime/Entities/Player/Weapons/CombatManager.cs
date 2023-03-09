@@ -110,22 +110,25 @@ namespace GameCells.Entities.Player.Weapons
         #region Combo
         public void TriggerCombo()
         {
+            _currentComboCount = (_currentComboCount + 1) % _weaponData.comboCount;
+
             _isComboFinished = false;
             _isNextComboAllowed = false;
 
-            if (_comboTimerCO != null)
-            {
-                StopCoroutine(_comboTimerCO);
-                _comboTimerCO = null;
-            }
-
+            Debug.Log(CurrentComboCount);
             if (_currentComboCount != 0)
+            {
+                if (_comboTimerCO != null)
+                {
+                    StopCoroutine(_comboTimerCO);
+                    _comboTimerCO = null;
+                }
                 _comboTimerCO = StartCoroutine(StartComboTimerCO());
+            }
         }
 
         public void AllowNextCombo()
         {
-            _currentComboCount = (_currentComboCount + 1) % _weaponData.comboCount;
             _isNextComboAllowed = true;
         }
 
