@@ -7,7 +7,20 @@ namespace GameCells.Entities.Player.Weapons
 {
     public class Weapon : MonoBehaviour
     {
-        public event Action OnWeaponHit;
+        public event Action OnWeaponActivate;
+        public event Action OnWeaponDeactivate;
+
+        public void Activate()
+        {
+            OnWeaponActivate?.Invoke();
+        }
+
+        public void Deactivate()
+        {
+            OnWeaponActivate?.Invoke();
+        }
+
+        /*public event Action OnWeaponHit;
 
         [Header("Hitbox")]
         [SerializeField] private BoxCollider _weaponHitbox;
@@ -101,6 +114,6 @@ namespace GameCells.Entities.Player.Weapons
         {
             yield return WaitHandler.GetWaitForSeconds(_trailRenderer.time);
             _trailRenderer.enabled = false;
-        }
+        }*/
     }
 }

@@ -5,14 +5,16 @@ using GameCells.Entities.Behaviour;
 
 namespace GameCells.Entities.Player.Weapons
 {
-    public class CombatManager : MonoBehaviour
+    public class PlayerCombatManager : MonoBehaviour
     {
         //TODO: REMOVE
         [SerializeField] private GameObject testHitSparks;
 
         [SerializeField] private SO_WeaponData _weaponData;
         [SerializeField] private Transform _weaponSocket;
-        private Weapon _currentWeapon;
+        //private Weapon _currentWeapon;
+        private SO_EntityData _playerData;
+        private WeaponHitbox _currentWeaponHitbox;
         private PlayerRootMotionManager _playerRootMotionManager;
         private PlayerWeaponAnimationEventTrigger _playerWeaponAnimationEventTrigger;
         private EB_CameraShakeSource _cameraShakeSource;
@@ -23,6 +25,7 @@ namespace GameCells.Entities.Player.Weapons
         private bool _isNextComboAllowed = false;
 
         public SO_WeaponData WeaponData => _weaponData;
+        //public Player Player => _player ??= GetComponentInParent<Player>();
         public PlayerRootMotionManager PlayerRootMotionManager => _playerRootMotionManager ??= GetComponentInChildren<PlayerRootMotionManager>();
         public PlayerWeaponAnimationEventTrigger PlayerWeaponAnimationEventTrigger => _playerWeaponAnimationEventTrigger ??= GetComponentInChildren<PlayerWeaponAnimationEventTrigger>();
         public EB_CameraShakeSource cameraShakeSource => _cameraShakeSource ??= GetComponentInChildren<EB_CameraShakeSource>();
@@ -54,9 +57,9 @@ namespace GameCells.Entities.Player.Weapons
             PlayerWeaponAnimationEventTrigger.OnPlayerHitboxActivate += ActivateWeaponHitbox;
             PlayerWeaponAnimationEventTrigger.OnPlayerHitboxDeactivate += DeactivateWeaponHitbox;
 
-            if (_currentWeapon != null)
+            if (_currentWeaponHitbox != null)
             {
-                _currentWeapon.OnWeaponHit += HandleWeaponHit;
+                _currentWeaponHitbox.OnWeaponHit += HandleWeaponHit;
             }
         }
 
@@ -67,20 +70,25 @@ namespace GameCells.Entities.Player.Weapons
             PlayerWeaponAnimationEventTrigger.OnPlayerHitboxActivate -= ActivateWeaponHitbox;
             PlayerWeaponAnimationEventTrigger.OnPlayerHitboxDeactivate -= DeactivateWeaponHitbox;
 
-            if (_currentWeapon != null)
+            if (_currentWeaponHitbox != null)
             {
-                _currentWeapon.OnWeaponHit -= HandleWeaponHit;
+                _currentWeaponHitbox.OnWeaponHit -= HandleWeaponHit;
             }
         }
 
         #endregion
 
+        public void Init(SO_EntityData playerData)
+        {
+            this._playerData = playerData;
+        }
+
         [ContextMenu("Initialize Weapon")]
         private void InitializeWeapon()
         {
-            if (_currentWeapon != null)
+            if (_currentWeaponHitbox != null)
             {
-                _currentWeapon.OnWeaponHit -= HandleWeaponHit;
+                _currentWeaponHitbox.OnWeaponHit -= HandleWeaponHit;
             }
 
             int count = _weaponSocket.childCount;
@@ -89,9 +97,9 @@ namespace GameCells.Entities.Player.Weapons
                 Destroy(_weaponSocket.GetChild(i).gameObject);
             }
 
-            _currentWeapon = Instantiate(_weaponData.WeaponPrefab, _weaponSocket).GetComponent<Weapon>();
+            _currentWeaponHitbox = Instantiate(_weaponData.WeaponPrefab, _weaponSocket).GetComponentInChildren<WeaponHitbox>();
             OnWeaponEquip?.Invoke(_weaponData.PlayerRuntimeAnimatorController);
-            _currentWeapon.OnWeaponHit += HandleWeaponHit;
+            _currentWeaponHitbox.OnWeaponHit += HandleWeaponHit;
 
             _currentComboCount = 0;
         }
@@ -102,20 +110,21 @@ namespace GameCells.Entities.Player.Weapons
             cameraShakeSource?.CameraShake();
 
             //TODO: REMOVE
-            var sparks = Instantiate(testHitSparks, _currentWeapon.transform);
+            var sparks = Instantiate(testHitSparks, _currentWeaponHitbox.transform);
             sparks.transform.SetParent(null);
             Destroy(sparks, 1f);
         }
 
         #region Combo
+
         public void TriggerCombo()
         {
-            _currentComboCount = (_currentComboCount + 1) % _weaponData.comboCount;
-
             _isComboFinished = false;
             _isNextComboAllowed = false;
 
+            _currentComboCount = (_currentComboCount + 1) % _weaponData.comboCount;
             Debug.Log(CurrentComboCount);
+
             if (_currentComboCount != 0)
             {
                 if (_comboTimerCO != null)
@@ -143,8 +152,6 @@ namespace GameCells.Entities.Player.Weapons
             _currentComboCount = 0;
         }
 
-
-        //TODO: maybe use async instead
         private IEnumerator StartComboTimerCO()
         {
             yield return WaitHandler.GetWaitForSeconds(_weaponData.comboResetTime);
@@ -159,12 +166,12 @@ namespace GameCells.Entities.Player.Weapons
 
         public void ActivateWeaponHitbox()
         {
-            _currentWeapon.Activate();
+            _currentWeaponHitbox.Activate(_playerData.DamageableLayers);
         }
 
         public void DeactivateWeaponHitbox()
         {
-            _currentWeapon.Deactivate();
+            _currentWeaponHitbox.Deactivate();
         }
 
         #endregion

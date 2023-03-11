@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &239085545110468175
 Transform:
   m_ObjectHideFlags: 0
@@ -83,6 +83,15 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
+        value: 0
+        inSlope: 14.799826
+        outSlope: 14.799826
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.2928572
+      - serializedVersion: 3
+        time: 0.10494749
         value: 0.58620644
         inSlope: 0
         outSlope: 0
@@ -104,7 +113,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0, g: 0.8101964, b: 1, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -133,7 +142,7 @@ TrailRenderer:
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
-    alignment: 0
+    alignment: 1
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
@@ -150,6 +159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1268894144631905344}
   - component: {fileID: 610658962810282236}
+  - component: {fileID: 126531602706820360}
   m_Layer: 6
   m_Name: Hitbox
   m_TagString: Untagged
@@ -165,7 +175,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3991832437583821132}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -181,10 +191,23 @@ BoxCollider:
   m_GameObject: {fileID: 3991832437583821132}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.1, y: 1, z: 0.1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &126531602706820360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3991832437583821132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60bf8570cbcf99e47be4fe7a179c0ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponLength: 1
 --- !u!1 &6507218747801648784
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ namespace GameCells.Entities.Player
         private PlayerStateFactory _playerStateFactory;
         private IInputHandler _inputHandler;
         private PlayerWeaponAnimationEventTrigger _playerAnimationEventTrigger;
-        private CombatManager _combatManager;
+        private PlayerCombatManager _combatManager;
         private CharacterController _characterController;
         private Animator _animator;
 
@@ -18,7 +18,7 @@ namespace GameCells.Entities.Player
         public PlayerStateFactory PlayerStateFactory => _playerStateFactory ??= new PlayerStateFactory(this._stateMachine, this);
         public IInputHandler InputHandler => _inputHandler ??= GetInputHandler();
         public PlayerWeaponAnimationEventTrigger PlayerAnimationEventTrigger => _playerAnimationEventTrigger ??= GetComponentInChildren<PlayerWeaponAnimationEventTrigger>();
-        public CombatManager CombatManager => _combatManager ??= GetComponentInChildren<CombatManager>();
+        public PlayerCombatManager CombatManager => _combatManager ??= GetComponentInChildren<PlayerCombatManager>();
         public CharacterController CharacterController => _characterController ??= GetComponent<CharacterController>();
         public Animator Animator => _animator ??= GetComponentInChildren<Animator>();
 
@@ -40,6 +40,7 @@ namespace GameCells.Entities.Player
         private void Awake()
         {
             _stateMachine.Initialize(PlayerStateFactory.Movement);
+            CombatManager.Init(EntityData);
         }
 
         private void Update()
@@ -69,8 +70,6 @@ namespace GameCells.Entities.Player
         {
             Animator.runtimeAnimatorController = runtimeAnimatorController;
         }
-
-        
 
         private void LookAtCurrentEnemy()
         {

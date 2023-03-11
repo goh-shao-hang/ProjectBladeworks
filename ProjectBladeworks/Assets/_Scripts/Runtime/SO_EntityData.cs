@@ -24,4 +24,7 @@ public class SO_EntityData : ScriptableObject
     public float FireDamageResistance;
     public float IceDamageResistance;
     public float ThunderDamageResistance;
+
+    [Header("Others")]
+    public LayerMask DamageableLayers;
 }
