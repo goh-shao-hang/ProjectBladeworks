@@ -9,7 +9,7 @@ namespace GameCells.Entities.Player
         private FiniteStateMachine _stateMachine = new FiniteStateMachine();
         private PlayerStateFactory _playerStateFactory;
         private IInputHandler _inputHandler;
-        private PlayerWeaponAnimationEventTrigger _playerAnimationEventTrigger;
+        private WeaponAnimationEventHandler _playerAnimationEventTrigger;
         private PlayerCombatManager _combatManager;
         private CharacterController _characterController;
         private Animator _animator;
@@ -17,7 +17,7 @@ namespace GameCells.Entities.Player
         //Component Getters
         public PlayerStateFactory PlayerStateFactory => _playerStateFactory ??= new PlayerStateFactory(this._stateMachine, this);
         public IInputHandler InputHandler => _inputHandler ??= GetInputHandler();
-        public PlayerWeaponAnimationEventTrigger PlayerAnimationEventTrigger => _playerAnimationEventTrigger ??= GetComponentInChildren<PlayerWeaponAnimationEventTrigger>();
+        public WeaponAnimationEventHandler PlayerAnimationEventTrigger => _playerAnimationEventTrigger ??= GetComponentInChildren<WeaponAnimationEventHandler>();
         public PlayerCombatManager CombatManager => _combatManager ??= GetComponentInChildren<PlayerCombatManager>();
         public CharacterController CharacterController => _characterController ??= GetComponent<CharacterController>();
         public Animator Animator => _animator ??= GetComponentInChildren<Animator>();

@@ -5,18 +5,16 @@ using UnityEngine;
 namespace GameCells.Entities.Player.Weapons
 {
     [RequireComponent(typeof(Weapon))]
-    public class WeaponTrail : MonoBehaviour
+    public class WeaponTrail : WeaponComponent
     {
-        // Start is called before the first frame update
-        void Start()
+        public override void Activate()
         {
-
+            throw new System.NotImplementedException();
         }
 
-        // Update is called once per frame
-        void Update()
+        public override void Deactivate()
         {
-
+            throw new System.NotImplementedException();
         }
     }
 }

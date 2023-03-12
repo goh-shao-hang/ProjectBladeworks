@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 4705897162307084101}
   - component: {fileID: 4301430848657181989}
   - component: {fileID: 543450651812203851}
+  - component: {fileID: 1312902089237323844}
   m_Layer: 6
   m_Name: IronSword
   m_TagString: Untagged
@@ -360,3 +361,15 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!114 &1312902089237323844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6507218747801648784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46b00155570deb44935147c4b356768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

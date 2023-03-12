@@ -16,7 +16,7 @@ namespace GameCells.Entities.Player.Weapons
         private SO_EntityData _playerData;
         private WeaponHitbox _currentWeaponHitbox;
         private PlayerRootMotionManager _playerRootMotionManager;
-        private PlayerWeaponAnimationEventTrigger _playerWeaponAnimationEventTrigger;
+        private WeaponAnimationEventHandler _playerWeaponAnimationEventTrigger;
         private EB_CameraShakeSource _cameraShakeSource;
 
         private Coroutine _comboTimerCO;
@@ -27,7 +27,7 @@ namespace GameCells.Entities.Player.Weapons
         public SO_WeaponData WeaponData => _weaponData;
         //public Player Player => _player ??= GetComponentInParent<Player>();
         public PlayerRootMotionManager PlayerRootMotionManager => _playerRootMotionManager ??= GetComponentInChildren<PlayerRootMotionManager>();
-        public PlayerWeaponAnimationEventTrigger PlayerWeaponAnimationEventTrigger => _playerWeaponAnimationEventTrigger ??= GetComponentInChildren<PlayerWeaponAnimationEventTrigger>();
+        public WeaponAnimationEventHandler PlayerWeaponAnimationEventTrigger => _playerWeaponAnimationEventTrigger ??= GetComponentInChildren<WeaponAnimationEventHandler>();
         public EB_CameraShakeSource cameraShakeSource => _cameraShakeSource ??= GetComponentInChildren<EB_CameraShakeSource>();
         public int CurrentComboCount => _currentComboCount;
         public bool IsComboFinished => _isComboFinished;
@@ -52,10 +52,10 @@ namespace GameCells.Entities.Player.Weapons
 
         private void OnEnable()
         {
-            PlayerWeaponAnimationEventTrigger.OnComboFinished += ComboFinished;
+            PlayerWeaponAnimationEventTrigger.OnAttackFinished += ComboFinished;
             PlayerWeaponAnimationEventTrigger.OnAllowNextCombo += AllowNextCombo;
-            PlayerWeaponAnimationEventTrigger.OnPlayerHitboxActivate += ActivateWeaponHitbox;
-            PlayerWeaponAnimationEventTrigger.OnPlayerHitboxDeactivate += DeactivateWeaponHitbox;
+            PlayerWeaponAnimationEventTrigger.OnWeaponBeginAction += ActivateWeaponHitbox;
+            PlayerWeaponAnimationEventTrigger.OnWeaponEndAction += DeactivateWeaponHitbox;
 
             if (_currentWeaponHitbox != null)
             {
@@ -65,10 +65,10 @@ namespace GameCells.Entities.Player.Weapons
 
         private void OnDisable()
         {
-            PlayerWeaponAnimationEventTrigger.OnComboFinished -= ComboFinished;
+            PlayerWeaponAnimationEventTrigger.OnAttackFinished -= ComboFinished;
             PlayerWeaponAnimationEventTrigger.OnAllowNextCombo -= AllowNextCombo;
-            PlayerWeaponAnimationEventTrigger.OnPlayerHitboxActivate -= ActivateWeaponHitbox;
-            PlayerWeaponAnimationEventTrigger.OnPlayerHitboxDeactivate -= DeactivateWeaponHitbox;
+            PlayerWeaponAnimationEventTrigger.OnWeaponBeginAction -= ActivateWeaponHitbox;
+            PlayerWeaponAnimationEventTrigger.OnWeaponEndAction -= DeactivateWeaponHitbox;
 
             if (_currentWeaponHitbox != null)
             {
