@@ -40,7 +40,7 @@ namespace GameCells.Entities.Player
         private void Awake()
         {
             _stateMachine.Initialize(PlayerStateFactory.Movement);
-            CombatManager.Init(EntityData);
+            CombatManager?.Init(EntityData);
         }
 
         private void Update()

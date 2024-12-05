@@ -1,7 +1,7 @@
+using GameCells.Entities.Behaviour;
 using System;
 using System.Collections;
 using UnityEngine;
-using GameCells.Entities.Behaviour;
 
 namespace GameCells.Entities.Player.Weapons
 {
@@ -25,7 +25,6 @@ namespace GameCells.Entities.Player.Weapons
         private bool _isNextComboAllowed = false;
 
         public SO_WeaponData WeaponData => _weaponData;
-        //public Player Player => _player ??= GetComponentInParent<Player>();
         public PlayerRootMotionManager PlayerRootMotionManager => _playerRootMotionManager ??= GetComponentInChildren<PlayerRootMotionManager>();
         public WeaponAnimationEventHandler PlayerWeaponAnimationEventTrigger => _playerWeaponAnimationEventTrigger ??= GetComponentInChildren<WeaponAnimationEventHandler>();
         public EB_CameraShakeSource cameraShakeSource => _cameraShakeSource ??= GetComponentInChildren<EB_CameraShakeSource>();

@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace GameCells.Entities.Player.Weapons
 {
-    [RequireComponent(typeof(Weapon))]
     public abstract class WeaponComponent : MonoBehaviour
     {
         private Weapon _weapon;
@@ -23,12 +22,11 @@ namespace GameCells.Entities.Player.Weapons
             weapon.OnWeaponDeactivate += Deactivate;
         }
 
-        public abstract void Activate();
+        public virtual void Activate() { }
 
-        public abstract void Deactivate();
+        public virtual void Deactivate() { }
     }
 
-    [RequireComponent(typeof(Weapon))]
     public abstract class WeaponComponents<T> : WeaponComponent
     {
         protected override void OnEnable()
@@ -41,8 +39,8 @@ namespace GameCells.Entities.Player.Weapons
             weapon.OnWeaponDeactivate += Deactivate;
         }
 
-        public void Activate(T param) { }
+        public virtual void Activate(T param) { }
 
-        //public abstract void Deactivate();
+        public virtual void Deactivate(T param) { }
     }
 }
